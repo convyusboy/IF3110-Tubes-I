@@ -13,7 +13,6 @@
   			{// code for IE6, IE5
   				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
   			}
-  			var valid = false;
   			function username_check () {
   				var username = document.getElementById('username').value;
   				if(username.length > 4)//if the lenght greater than 3 characters
@@ -122,12 +121,25 @@
 					document.getElementById("reg_btn").disabled = false;
 				}
 			}
+			var username = localStorage.getItem('username');
+			function load () {
+				xmlhttp.open("POST","ajax_check2.php",true);
+				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				xmlhttp.send("username2="+username);
+
+				xmlhttp.onreadystatechange = function () {
+					if (xmlhttp.readyState==4 && xmlhttp.status==200)
+					{
+						document.getElementById("content").innerHTML=xmlhttp.responseText;
+					}
+				}				
+			}
 		</script>
 		<style type="text/css">
 			body {
 				font-family:Arial, Helvetica, sans-serif
 			}
-			span { 	
+			span {
 				font-size:11px;
 				margin-left:10px;
 			}
@@ -163,53 +175,8 @@
 			}
 		</style>
 	</head>
-	<body onLoad="load()">
+	<body onLoad ="load()">
 		<div id="content">
-		 	<form method="post" action="add_account.php">
-		    	<div class="style_form">
-		      		<label for="username">Username :</label>
-		      		<input type="text" name="username" id="username" class="form_element" onkeydown="username_check()"/>
-		      		<span id="status"></span> </div>
-		    	<div class="style_form">
-		      		<label for="password">Password :</label>
-		      		<input type="text" name="password" id="password" class="form_element" onkeydown="password_check()"/>
-		      		<span id="status2"></span> </div>
-		    	<div class="style_form">
-		      		<label for="password2">Confirm Password :</label>
-		      		<input type="text" name="password2" id="password2" class="form_element" onkeydown="password2_check()"/>
-		      		<span id="status3"></span> </div>
-		    	<div class="style_form">
-		      		<label for="nama_lengkap">Nama Lengkap :</label>
-		      		<input type="text" name="nama_lengkap" id="nama_lengkap" class="form_element" onkeydown="nama_lengkap_check()"/>
-		      		<span id="status4"></span> </div>
-		    	<div class="style_form">
-		      		<label for="email">Email :</label>
-		      		<input type="text" name="email" id="email" class="form_element" onkeydown="email_check()"/>
-		      		<span id="status5"></span> </div>
-		    	<div class="style_form">
-		      		<label for="alamat">Alamat :</label>
-		      		<input type="text" name="alamat" id="alamat" class="form_element"/>
-		      	</div>
-		    	<div class="style_form">
-		      		<label for="provinsi">Provinsi :</label>
-		      		<input type="text" name="provinsi" id="provinsi" class="form_element"/>
-		      	</div>
-		    	<div class="style_form">
-		      		<label for="kota">Kota :</label>
-		      		<input type="text" name="kota" id="kota" class="form_element"/>
-		      	</div>
-		    	<div class="style_form">
-		      		<label for="kodepos">Kodepos :</label>
-		      		<input type="text" name="kodepos" id="kodepos" class="form_element"/>
-		      	</div>
-		    	<div class="style_form">
-		      		<label for="handphone">Nomor Handphone :</label>
-		      		<input type="text" name="handphone" id="handphone" class="form_element"/>
-		      	</div>
-		    	<div class="style_form">
-		      		<input name="submit" type="submit" value="register" id="reg_btn" disabled/>
-		    	</div>
-		  	</form>
 		</div>
 	</body>
 </html>
