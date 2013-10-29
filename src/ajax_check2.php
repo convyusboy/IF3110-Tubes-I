@@ -61,6 +61,9 @@ if(isset($_POST['username']))//If a username has been submitted
 
 	echo "
  	<form method=\"post\" action=\"update_account.php\">
+      <div class=\"style_form\">
+          <input type=\"hidden\" name=\"username\" id=\"username\" value=\"".$username."\" class=\"form_element\" onkeydown=\"password_check()\"/>
+          </div>
     	<div class=\"style_form\">
       		<label for=\"password\">Password :</label>
       		<input type=\"text\" name=\"password\" id=\"password\" class=\"form_element\" onkeydown=\"password_check()\"/>
